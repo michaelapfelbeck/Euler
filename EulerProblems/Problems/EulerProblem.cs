@@ -13,6 +13,12 @@ namespace Problems
         protected string problemText = "";
 
         public string ProblemText { get { return problemText; } }
+        protected abstract void SetProblemText();
+
+        public EulerProblem()
+        {
+            SetProblemText();
+        }
 
         abstract public void Run();
 

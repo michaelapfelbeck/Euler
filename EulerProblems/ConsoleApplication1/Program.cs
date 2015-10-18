@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace ConsoleApplication1
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            var problem = new Problem2();
+            var problem = new Problem3();
 
             Console.WriteLine(problem.ProblemText+"\n");
 
