@@ -14,7 +14,7 @@ namespace Problems
 
         protected override void SetProblemText()
         {
-            problemText = "2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.\nWhat is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?";
+            problemText = "Problem 5:\n2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.\nWhat is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?";
         }
 
         public override void Run()

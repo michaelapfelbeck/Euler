@@ -11,7 +11,7 @@ namespace Problems
         private static string format = "The largest palindrome that is the product of two 3 digit numbers is {0}.";
         protected override void SetProblemText()
         {
-            problemText="A palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.\nFind the largest palindrome made from the product of two 3-digit numbers.";
+            problemText="Problem 4:\nA palindromic number reads the same both ways. The largest palindrome made from the product of two 2-digit numbers is 9009 = 91 × 99.\nFind the largest palindrome made from the product of two 3-digit numbers.";
         }
 
         public override void Run()
