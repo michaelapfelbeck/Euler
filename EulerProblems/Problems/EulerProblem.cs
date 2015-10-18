@@ -9,8 +9,8 @@ namespace Problems
     public abstract class EulerProblem
     {
         protected int result = -1;
-        protected string stringResult = "";
-        protected string problemText = "";
+        protected string stringResult = "Eh, I dunno.";
+        protected string problemText = "What's the answer this time?";
 
         public string ProblemText { get { return problemText; } }
         protected abstract void SetProblemText();
