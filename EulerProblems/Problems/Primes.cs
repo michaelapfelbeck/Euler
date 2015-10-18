@@ -10,7 +10,7 @@ namespace Problems
     {
         public static Dictionary<int, int> PrimeFactors(int test)
         {
-            List<int> primes = Primes.SieveOfEratosthenes((long)test);
+            List<int> primes = SieveOfEratosthenes((long)test);
             Dictionary<int, int> factors = new Dictionary<int, int>();
 
             int result = test;
