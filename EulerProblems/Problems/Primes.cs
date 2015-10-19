@@ -10,7 +10,7 @@ namespace Problems
     {
         public static Dictionary<int, int> PrimeFactors(int test)
         {
-            List<int> primes = SieveOfEratosthenes((long)test);
+            List<long> primes = SieveOfEratosthenes(test);
             Dictionary<int, int> factors = new Dictionary<int, int>();
 
             int result = test;
@@ -35,9 +35,9 @@ namespace Problems
             return factors;
         }
 
-        public static List<int> SieveOfEratosthenes(long max)
+        public static List<long> SieveOfEratosthenes(long max)
         {
-            List<int> primes = new List<int>();
+            List<long> primes = new List<long>();
             bool[] isPrime = new bool[max + 1];
             for (int i = 0; i <= max; i++)
             {

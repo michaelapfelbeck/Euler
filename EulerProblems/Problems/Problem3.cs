@@ -17,11 +17,11 @@ namespace Problems
 
         public override void Run()
         {
-            List<int> primes = Primes.SieveOfEratosthenes((long)Math.Sqrt(target));
+            List<long> primes = Primes.SieveOfEratosthenes((long)Math.Sqrt(target));
 
             for (int i = primes.Count - 1; i >= 2; i--)
             {
-                int testPrime = primes[i];
+                long testPrime = primes[i];
                 if (target % testPrime == 0)
                 {
                     result = testPrime;

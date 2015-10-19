@@ -8,7 +8,7 @@ namespace Problems
 {
     public abstract class EulerProblem
     {
-        protected int result = -1;
+        protected long result = -1;
         protected string stringResult = "Eh, I dunno.";
         protected string problemText = "What's the answer this time?";
 
@@ -22,7 +22,7 @@ namespace Problems
 
         abstract public void Run();
 
-        public int NumberResult { get { return result; } }
+        public long NumberResult { get { return result; } }
 
         public string StringResult { get { return stringResult; } }
     }
