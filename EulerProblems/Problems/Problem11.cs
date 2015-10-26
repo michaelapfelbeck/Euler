@@ -40,22 +40,72 @@ namespace Problems
 
         public override void Run()
         {
-            MaxProductHorizontal(productLength);
-            result = 7;
+            long maxHoriz = MaxProductHorizontal(productLength);
+            long maxVert = MaxProductVertical(productLength);
+            result = Math.Max(maxHoriz, maxVert);
 
-            stringResult = string.Format(format, data[1][2]);
+            stringResult = string.Format(format, result);
         }
 
         private long MaxProductHorizontal(int length)
         {
             long maxProduct = -1;
-            
+
             for (int y = 0; y < data.Length; y++)
             {
-                Console.WriteLine("line {0} is {1}", y, string.Join(",", data[y]));
+                //Console.WriteLine("line {0} is {1}", y, string.Join(",", data[y]));
+                for (int x = 0; x <= data[y].Length - length; x++)
+                {
+                    long product = data[y].Where((val, index) => (index >= x && index < x + length)).Aggregate((sum, element) => sum * element);
+                    //Console.WriteLine("Product is {0}.", product);
+                    if (product > maxProduct)
+                    {
+                        maxProduct = product;
+                        Console.WriteLine("New max product horizontal is {0}.", maxProduct);
+                    }
+                }
             }
 
+            Console.WriteLine("MaxProductHorizontal: {0}.", maxProduct);
             return maxProduct;
+        }
+
+        private long MaxProductVertical(int length)
+        {
+            long maxProduct = -1;
+
+            for (int y = 0; y <= data.Length-length; y++)
+            {
+                //Console.WriteLine("line {0} is {1}", y, string.Join(",", data[y]));
+                for (int x = 0; x < data[y].Length; x++)
+                {
+                    long[] temp = VerticalSlice(data, x, y, length);
+                    //string asString = string.Join(",", temp);
+                    //Console.WriteLine("A {0} long vertical slice starting at [{1},{2}] is {3}",length,x, y, asString);
+                    long product = temp.Aggregate((sum, element) => sum * element);
+                    //Console.WriteLine("Product is {0}.", product);
+                    if (product > maxProduct)
+                    {
+                        maxProduct = product;
+                        Console.WriteLine("New max product vertical is {0}.", maxProduct);
+                    }
+                }
+            }
+
+            Console.WriteLine("MaxProductVertical: {0}.", maxProduct);
+            return maxProduct;
+        }
+
+        private long[] VerticalSlice(long[][] data, int x, int y, int length)
+        {
+            long[] result = new long[length];
+
+            for (int i = 0; i < length; i++)
+            {
+                result[i] = data[y + i][x];
+            }
+
+            return result;
         }
     }
 }
