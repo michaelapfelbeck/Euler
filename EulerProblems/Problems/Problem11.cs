@@ -42,7 +42,11 @@ namespace Problems
         {
             long maxHoriz = MaxProductHorizontal(productLength);
             long maxVert = MaxProductVertical(productLength);
-            result = Math.Max(maxHoriz, maxVert);
+            long maxDiagR = MaxProductDiagonalRight(productLength);
+            long maxDiagL = MaxProductDiagonalLeft(productLength);
+            long temp1 = Math.Max(maxHoriz, maxVert);
+            long temp2 = Math.Max(maxDiagR, maxDiagL);
+            long result = Math.Max(temp1, temp2);
 
             stringResult = string.Format(format, result);
         }
@@ -56,17 +60,20 @@ namespace Problems
                 //Console.WriteLine("line {0} is {1}", y, string.Join(",", data[y]));
                 for (int x = 0; x <= data[y].Length - length; x++)
                 {
-                    long product = data[y].Where((val, index) => (index >= x && index < x + length)).Aggregate((sum, element) => sum * element);
+                    long[] temp = HorizontalSlice(data, x, y, length);
+                    //long product = data[y].Where((val, index) => (index >= x && index < x + length)).Aggregate((sum, element) => sum * element);
+                    long product = temp.Aggregate((sum, element) => sum * element);
+                    
                     //Console.WriteLine("Product is {0}.", product);
                     if (product > maxProduct)
                     {
                         maxProduct = product;
-                        Console.WriteLine("New max product horizontal is {0}.", maxProduct);
+                        //Console.WriteLine("New max product horizontal is {0}.", maxProduct);
                     }
                 }
             }
 
-            Console.WriteLine("MaxProductHorizontal: {0}.", maxProduct);
+            //Console.WriteLine("MaxProductHorizontal: {0}.", maxProduct);
             return maxProduct;
         }
 
@@ -74,7 +81,7 @@ namespace Problems
         {
             long maxProduct = -1;
 
-            for (int y = 0; y <= data.Length-length; y++)
+            for (int y = 0; y <= data.Length - length; y++)
             {
                 //Console.WriteLine("line {0} is {1}", y, string.Join(",", data[y]));
                 for (int x = 0; x < data[y].Length; x++)
@@ -87,22 +94,152 @@ namespace Problems
                     if (product > maxProduct)
                     {
                         maxProduct = product;
-                        Console.WriteLine("New max product vertical is {0}.", maxProduct);
+                        //Console.WriteLine("New max product vertical is {0}.", maxProduct);
                     }
                 }
             }
 
-            Console.WriteLine("MaxProductVertical: {0}.", maxProduct);
+            //Console.WriteLine("MaxProductVertical: {0}.", maxProduct);
             return maxProduct;
+        }
+
+        private long MaxProductDiagonalRight(int length)
+        {
+            long maxProduct = -1;
+
+            for (int y = 0; y <= data.Length - length; y++)
+            {
+                //Console.WriteLine("line {0} is {1}", y, string.Join(",", data[y]));
+                for (int x = 0; x <= data[y].Length - length; x++)
+                {
+                    long[] temp = DiagonalRightSlice(data, x, y, length);
+
+                    //string asString = string.Join(",", temp);
+                    //Console.WriteLine("A {0} long diagonal right slice starting at [{1},{2}] is {3}", length, x, y, asString);
+                    long product = temp.Aggregate((sum, element) => sum * element);
+                    //Console.WriteLine("Product is {0}.", product);
+                    if (product > maxProduct)
+                    {
+                        maxProduct = product;
+                        //Console.WriteLine("New max product diagonal right is {0}.", maxProduct);
+                    }
+                }
+            }
+
+            //Console.WriteLine("MaxProductDiagonalRight: {0}.", maxProduct);
+            return maxProduct;
+        }
+
+        private long MaxProductDiagonalLeft(int length)
+        {
+            long maxProduct = -1;
+
+            for (int y = 0; y <= data.Length - length; y++)
+            {
+                //Console.WriteLine("line {0} is {1}", y, string.Join(",", data[y]));
+                for (int x = length-1; x < data[y].Length; x++)
+                {
+                    long[] temp = DiagonalLeftSlice(data, x, y, length);
+                    if (null == temp)
+                    {
+                        Console.WriteLine("wat? null");
+                    }
+                    //string asString = string.Join(",", temp);
+                    //Console.WriteLine("A {0} long diagonal left slice starting at [{1},{2}] is {3}", length, x, y, asString);
+                    long product = temp.Aggregate((sum, element) => sum * element);
+                    //Console.WriteLine("Product is {0}.", product);
+                    if (product > maxProduct)
+                    {
+                        maxProduct = product;
+                        //Console.WriteLine("New max product diagonal right is {0}.", maxProduct);
+                    }
+                }
+            }
+
+            //Console.WriteLine("MaxProductDiagonalLeft: {0}.", maxProduct);
+            return maxProduct;
+        }
+
+        private long[] DiagonalRightSlice(long[][] data, int x, int y, int length)
+        {
+            if (null == data || data.Length < y + length)
+            {
+                return null;
+            }
+            if (null == data[y] || data[y].Length < x + length)
+            {
+                return null;
+            }
+            long[] result = new long[length];
+
+            for (int i = 0; i < length; i++)
+            {
+                result[i] = data[y + i][x + i];
+            }
+
+            return result;
+        }
+
+        private long[] DiagonalLeftSlice(long[][] data, int x, int y, int length)
+        {
+            if (null == data || data.Length < y + length)
+            {
+                return null;
+            }
+            if (null == data[y] || data[y].Length <= x)
+            {
+                return null;
+            }
+            if (x < length-1)
+            {
+                return null;
+            }
+            long[] result = new long[length];
+
+            for (int i = 0; i < length; i++)
+            {
+                result[i] = data[y + i][x - i];
+            }
+
+            return result;
         }
 
         private long[] VerticalSlice(long[][] data, int x, int y, int length)
         {
+            if (null == data || data.Length < y + length)
+            {
+                return null;
+            }
+            if (null == data[y] || data[y].Length <= x)
+            {
+                return null;
+            }
             long[] result = new long[length];
 
             for (int i = 0; i < length; i++)
             {
                 result[i] = data[y + i][x];
+            }
+
+            return result;
+        }
+
+        private long[] HorizontalSlice(long[][] data, int x, int y, int length)
+        {
+            if (null == data || data.Length <= y)
+            {
+                return null;
+            }
+            if (null == data[y] || data[y].Length < x + length)
+            {
+                return null;
+            }
+
+            long[] result = new long[length];
+
+            for (int i = 0; i < length; i++)
+            {
+                result[i] = data[y][x + i];
             }
 
             return result;
