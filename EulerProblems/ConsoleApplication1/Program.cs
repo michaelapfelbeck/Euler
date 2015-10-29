@@ -12,7 +12,7 @@ namespace ConsoleApplication1
     {
         static void Main(string[] args)
         {
-            var problem = new Problem12();
+            var problem = new Problem13();
 
             Console.WriteLine(problem.ProblemText+"\n");
 
