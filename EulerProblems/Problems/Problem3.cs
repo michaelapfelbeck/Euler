@@ -17,7 +17,7 @@ namespace Problems
 
         public override void Run()
         {
-            List<long> primes = Primes.SieveOfEratosthenes((long)Math.Sqrt(target));
+            List<long> primes = EulerMath.SieveOfEratosthenes((long)Math.Sqrt(target));
 
             for (int i = primes.Count - 1; i >= 2; i--)
             {

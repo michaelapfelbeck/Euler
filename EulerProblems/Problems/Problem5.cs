@@ -26,7 +26,7 @@ namespace Problems
 
             for (int i = start; i <= end; i++)
             {
-                Dictionary<int, int> currFactors = Primes.PrimeFactors(i);
+                Dictionary<int, int> currFactors = EulerMath.PrimeFactors(i);
                 allFactors = CombineFactors(allFactors, currFactors);
             }
 

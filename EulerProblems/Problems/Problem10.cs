@@ -19,7 +19,7 @@ namespace Problems
 
         public override void Run()
         {
-            List<long> primes = Primes.SieveOfEratosthenes(largestPrime);
+            List<long> primes = EulerMath.SieveOfEratosthenes(largestPrime);
 
             result = primes.Aggregate((sum, x) => sum + x);
 

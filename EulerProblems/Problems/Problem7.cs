@@ -20,7 +20,7 @@ namespace Problems
         {
             result = 7;
 
-            List<long> primes = Primes.SieveOfEratosthenes(200000);
+            List<long> primes = EulerMath.SieveOfEratosthenes(200000);
             result = primes[end-1];
             stringResult = String.Format(format, end, result);
         }
