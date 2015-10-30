@@ -9,7 +9,7 @@ namespace Problems
     public class Problem15:EulerProblem
     {
         private static string format = "The number of lattice paths through a 20x20 matrix is {0}.";
-        private static int matrixSize = 0;
+        private static int gridSize = 20;
 
         protected override void SetProblemText()
         {
@@ -18,7 +18,6 @@ namespace Problems
 
         public override void Run()
         {
-            const int gridSize = 20;
             long paths = 1;
 
             for (int i = 0; i < gridSize; i++)
